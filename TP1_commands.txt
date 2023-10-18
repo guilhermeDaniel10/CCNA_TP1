@@ -1,0 +1,5 @@
+1- Configurar os nomes para os switches
+
+        Switch# configure terminal
+        Switch(config)# hostname Sw-Floor-1
+        Sw-Floor-1(config)#
