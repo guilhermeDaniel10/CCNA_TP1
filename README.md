@@ -118,7 +118,7 @@ SW1-Zg(config)# ip default-gateway <gateway_IP_address>
 ```
 
 <b>VLAN IPv6:</b>
-<br><b>Nota: certificar que o SDM do switch é dual-ipv4-and-ipv6</b>
+<br><b>Nota:</b> certificar que o SDM do switch é dual-ipv4-and-ipv6 com <b>sdm prefer dual ipv4-and-ipv6 default</b>
 ```
 SW1-Zg> enable
 SW1-Zg# conf t
