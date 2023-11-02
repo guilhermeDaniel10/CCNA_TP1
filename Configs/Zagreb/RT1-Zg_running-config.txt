@@ -1,0 +1,122 @@
+!
+version 15.1
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+service password-encryption
+security passwords min-length 5
+!
+hostname RT1-Zg
+!
+login block-for 300 attempts 3 within 120
+!
+!
+enable secret 5 $1$mERr$9cTjUIEqNGurQiFU.ZeCi1
+!
+!
+!
+!
+!
+!
+ip cef
+ipv6 unicast-routing
+!
+no ipv6 cef
+!
+!
+!
+username admin password 7 082048430017
+username cisco secret 5 $1$mERr$9cTjUIEqNGurQiFU.ZeCi1
+!
+!
+license udi pid CISCO2911/K9 sn FTX1524J6D2-
+!
+!
+!
+!
+!
+!
+!
+!
+!
+ip ssh version 2
+no ip domain-lookup
+ip domain-name isepacademy.ccna.itn.com
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ description Interface de loopback do Router de Zagreb para a rede de Accounting
+ ip address 172.20.3.254 255.255.255.128
+ ipv6 address 2001:A:0:1::1/64
+!
+interface GigabitEthernet0/0
+ description Interface entre o router de Zagreb e o router de Pula
+ ip address 10.0.0.1 255.255.255.252
+ duplex auto
+ speed auto
+ ipv6 address FE80::1 link-local
+ ipv6 enable
+!
+interface GigabitEthernet0/1
+ description Interface entre o Router de Zagreb e o Router de Split
+ ip address 10.0.0.5 255.255.255.252
+ duplex auto
+ speed auto
+ ipv6 address FE80::2 link-local
+!
+interface GigabitEthernet0/2
+ description Interface de loopback do Router de Zagreb para a subrede de Administration
+ ip address 172.20.3.126 255.255.255.128
+ duplex auto
+ speed auto
+ ipv6 address 2001:A::1/64
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+ip classless
+ip route 172.20.4.0 255.255.255.192 10.0.0.2 
+ip route 172.20.11.0 255.255.255.0 10.0.0.6 
+!
+ip flow-export version 9
+!
+ipv6 route 2001:B:0:3::/64 GigabitEthernet0/0 FE80::3
+ipv6 route 2001:C:0:3::/64 GigabitEthernet0/1 FE80::5
+!
+ip access-list extended sl_def_acl
+ deny tcp any any eq telnet
+ deny tcp any any eq www
+ deny tcp any any eq 22
+ permit tcp any any eq 22
+!
+banner motd #Authorized Access Only to Router Zagreb#
+!
+!
+!
+!
+line con 0
+ password 7 0822455D0A16
+ login
+!
+line aux 0
+!
+line vty 0 4
+ exec-timeout 30 0
+ password 7 0822455D0A16
+ login local
+ transport input ssh
+line vty 5 15
+ login local
+ transport input ssh
+!
+!
+!
+end
+
