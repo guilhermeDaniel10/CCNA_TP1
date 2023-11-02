@@ -104,6 +104,49 @@ SW1-Zg# erase startup-config
 SW1-Zg# reload
 ```
 
+### 5- VLAN e SSH num Switch
+
+<b>VLAN IPv4:</b>
+```
+SW1-Zg> enable
+SW1-Zg# conf t
+SW1-Zg(config)# interface vlan1
+SW1-Zg(config-if)# ip address <ip> <subnet-mask>
+SW1-Zg(config-if)# no shut
+SW1-Zg(config-if)# exit
+SW1-Zg(config)# ip default-gateway <gateway_IP_address>
+```
+
+<b>VLAN IPv6:</b>
+<br><b>Nota: certificar que o SDM do switch é dual-ipv4-and-ipv6</b>
+```
+SW1-Zg> enable
+SW1-Zg# conf t
+SW1-Zg(config)# interface vlan1
+SW1-Zg(config-if)# ipv6 address <ip> <subnet-mask>
+SW1-Zg(config-if)# no shut
+SW1-Zg(config-if)# exit
+SW1-Zg(config)# ipv6 route ::/0 <gateway_IP_address>
+```
+
+<b>SSH:</b>
+```
+SW1-Zg> enable
+SW1-Zg# conf t
+SW1-Zg(config)# no ip domain-lookup
+SW1-Zg(config)# hostname SW1-Zg
+SW1-Zg(config)# ip domain-name isepacademy.ccna.itn.com
+SW1-Zg(config)# security passwords min-length 5
+SW1-Zg(config)# service password-encryption
+SW1-Zg(config)# enable secret class
+SW1-Zg(config)# username cisco secret class
+SW1-Zg(config)# crypto key generate rsa generate-keys modulus 2014
+SW1-Zg(config)# line vty 0 4
+SW1-Zg(config-line)# login local
+SW1-Zg(config-line)# transport input ssh
+
+```
+
 ## <span style="color: #65FF4E">Configuração Básica de Routers</span>
 
 ### 1- Configurar o nome do <span style="color: #65FF4E">router</span>
@@ -270,3 +313,11 @@ R1(config-line)# transport input ssh
 ```
 
 <b>Nota: é melhor seguir este tutorial</b>
+
+### 5- Configurar loopbacks
+```
+RT1-Zg> enable
+RT1-Zg# conf t
+RT1-Zg(config)# interface loopback <number>
+RT1-Zg(config)# ip address <IP_address> <subnet_mask>
+```
