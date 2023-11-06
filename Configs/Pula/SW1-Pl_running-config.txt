@@ -86,7 +86,7 @@ banner motd #Authorized Access Only to Switch Pula#
 !
 !
 !
-ipv6 route ::/0 2001:A::1
+ipv6 route ::/0 2001:B:0:3::1
 !
 !
 line con 0

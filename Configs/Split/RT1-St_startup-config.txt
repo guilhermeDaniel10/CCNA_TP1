@@ -91,11 +91,20 @@ interface Vlan1
 ip classless
 ip route 172.20.3.0 255.255.255.128 10.0.0.5 
 ip route 172.20.4.0 255.255.255.192 10.0.0.9 
+ip route 10.0.0.0 255.255.255.252 10.0.0.9 
+ip route 172.20.3.128 255.255.255.128 10.0.0.5 
+ip route 172.20.7.0 255.255.255.0 10.0.0.9 
+ip route 172.20.4.64 255.255.255.192 10.0.0.9 
+ip route 172.20.4.128 255.255.255.128 10.0.0.9 
 !
 ip flow-export version 9
 !
 ipv6 route 2001:A::/64 GigabitEthernet0/0 FE80::2
 ipv6 route 2001:B:0:3::/64 GigabitEthernet0/1 FE80::4
+ipv6 route 2001:B::/64 GigabitEthernet0/1 FE80::4
+ipv6 route 2001:B:0:1::/64 GigabitEthernet0/1 FE80::4
+ipv6 route 2001:B:0:2::/64 GigabitEthernet0/1 FE80::4
+ipv6 route 2001:A:0:1::/64 GigabitEthernet0/0 FE80::2
 !
 ip access-list extended sl_def_acl
  deny tcp any any eq telnet

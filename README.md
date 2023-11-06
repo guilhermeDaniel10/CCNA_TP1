@@ -273,6 +273,12 @@ RT1-Pl(config)# ip route 172.20.3.0(endereço da rede remota) 255.255.255.128 (m
 
 (etc)
 
+IPv6:
+```
+R1(config)#ipv6 route 2001:DB8:2:2::/64 Serial 0/0/0 FE80::21C:F6FF:FE11:41F0
+```
+
+<b>Nota:</b> É necessário configurar os routers como <b>ipv6 unicast routing</b>
 
 ### 4- Configurar SSH (Parte 3 do trabalho)
 
